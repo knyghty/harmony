@@ -36,6 +36,10 @@ class RNG():
         total = sum((random.randrange(1, num_faces) for _ in range(int(num_dice))))
         await self.bot.say(str(total))
 
+    @commands.command()
+    async def choose(self, *choices : str):
+        await self.bot.say(random.choice(choices))
+
 
 def setup(bot):
     bot.add_cog(RNG(bot))
