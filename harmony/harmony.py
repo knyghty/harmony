@@ -23,10 +23,7 @@ async def on_ready():
 
 
 if __name__ == "__main__":
-    extensions = pkgutil.iter_modules(extensions.__path__)
-    extensions = ['extensions.{}'.format(extension.name) for extension in extensions]
-
-    for extension in extensions:
+    for extension in ('extensions.{}'.format(ext.name) for ext in pkgutil.iter_modules(extensions.__path__)):
         try:
             bot.load_extension(extension)
         except Exception as e:
