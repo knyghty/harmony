@@ -22,7 +22,7 @@ async def on_ready():
     print('------')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     for extension in ('extensions.{}'.format(ext.name) for ext in pkgutil.iter_modules(extensions.__path__)):
         try:
             bot.load_extension(extension)
