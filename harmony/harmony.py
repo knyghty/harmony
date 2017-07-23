@@ -1,7 +1,9 @@
-import random
+import pkgutil
 import sys
 
 from discord.ext import commands
+
+import extensions
 
 try:
     from conf import settings
@@ -20,24 +22,15 @@ async def on_ready():
     print('------')
 
 
-@bot.command()
-async def roll(dice : str):
-    try:
-        num_dice, num_faces = map(int, dice.split('d'))
-    except Exception:
-        await bot.say('Format is XdY')
-        return
+if __name__ == "__main__":
+    extensions = pkgutil.iter_modules(extensions.__path__)
+    extensions = ['extensions.{}'.format(extension.name) for extension in extensions]
 
-    if num_dice > 20 or num_faces > 1000:
-        await bot.say('Max 20 dice and 1000 faces')
-        return
+    for extension in extensions:
+        try:
+            bot.load_extension(extension)
+        except Exception as e:
+            exc = '{}: {}'.format(type(e).__name__, e)
+            print('Failed to load extension {}\n{}'.format(extension, exc))
 
-    if num_dice < 1 or num_faces < 1:
-        await bot.say('Stick to positive numbers')
-        return
-
-    total = sum((random.randrange(1, num_faces) for _ in range(int(num_dice))))
-    await bot.say(str(total))
-
-
-bot.run(settings.BOT_TOKEN)
+    bot.run(settings.BOT_TOKEN)
