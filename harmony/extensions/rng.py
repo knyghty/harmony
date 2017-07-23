@@ -3,12 +3,12 @@ import random
 from discord.ext import commands
 
 
-class RNG():
+class RNG:
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
-    async def roll(self, dice : str = None):
+    async def roll(self, dice: str = None):
         """Roll some dice.
 
         Keyword arguments:
@@ -37,7 +37,13 @@ class RNG():
         await self.bot.say(str(total))
 
     @commands.command()
-    async def choose(self, *choices : str):
+    async def choose(self, *choices: str):
+        """
+        Choose between the options
+
+        Keyword arguments:
+        choices -- Space separated list of options
+        """
         await self.bot.say(random.choice(choices))
 
 

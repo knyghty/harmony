@@ -6,6 +6,7 @@ from discord.ext import commands
 import extensions
 
 try:
+    # noinspection PyUnresolvedReferences
     from conf import settings
 except ImportError:
     sys.exit('Before you can run harmony, you must follow the instructions in `conf/settings_template.py`')
