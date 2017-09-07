@@ -104,5 +104,4 @@ ENV/
 .idea/*
 
 # Project
-harmony/conf/settings.py
 *.iml
