@@ -20,6 +20,10 @@ class RNG:
             await self.bot.say('Format is XdY!')
             return
 
+        if num_dice not in  range(1, 21) or num_faces not in range(2, 121):
+            await self.bot.say('Between 1 and 20 dice of between 2 and 120 faces.')
+            return
+
         rolls = [random.randint(1, num_faces) for _ in range(num_dice)]
         await self.bot.say(', '.join(map(str, rolls)) + ' (total {})'.format(sum(rolls)))
 
