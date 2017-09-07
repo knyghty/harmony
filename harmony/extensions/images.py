@@ -21,9 +21,7 @@ class Image:
         Keyword arguments:
         filename -- File name of the file to upload
         """
-        print(os.path.join(IMAGE_DIR, image + '.*'))
         matches = glob.glob(os.path.join(IMAGE_DIR, image + '.*'))
-        print(matches)
         if len(matches) != 1:
             await self.bot.say('uwotm8')
             return
