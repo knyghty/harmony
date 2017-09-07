@@ -8,33 +8,20 @@ class RNG:
         self.bot = bot
 
     @commands.command()
-    async def roll(self, dice: str = None):
+    async def roll(self, dice: str):
         """Roll some dice.
 
         Keyword arguments:
         dice -- number of dice (X) and faces (Y) in the format XdY
         """
-
-        if not dice:
-            await self.bot.say('Usage: !roll XdY')
-            return
-
         try:
-            num_dice, num_faces = map(int, dice.split('d'))
+            num_faces, num_dice = map(int, dice.split('d'))
         except Exception:
-            await self.bot.say('Format is XdY')
+            await self.bot.say('Format is XdY!')
             return
 
-        if num_dice > 20 or num_faces > 1000:
-            await self.bot.say('Max 20 dice and 1000 faces')
-            return
-
-        if num_dice < 1 or num_faces < 1:
-            await self.bot.say('Stick to positive numbers')
-            return
-
-        total = sum((random.randrange(1, num_faces) for _ in range(int(num_dice))))
-        await self.bot.say(str(total))
+        rolls = [random.randint(1, num_faces) for _ in range(num_dice)]
+        await self.bot.say(', '.join(rolls) + ' (total {})'.format(sum(rolls)))
 
     @commands.command()
     async def choose(self, *choices: str):
