@@ -21,7 +21,7 @@ class RNG:
             return
 
         rolls = [random.randint(1, num_faces) for _ in range(num_dice)]
-        await self.bot.say(', '.join(rolls) + ' (total {})'.format(sum(rolls)))
+        await self.bot.say(', '.join(map(str, rolls)) + ' (total {})'.format(sum(rolls)))
 
     @commands.command()
     async def choose(self, *choices: str):
