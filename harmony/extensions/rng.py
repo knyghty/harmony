@@ -15,7 +15,7 @@ class RNG:
         dice -- number of dice (X) and faces (Y) in the format XdY
         """
         try:
-            num_faces, num_dice = map(int, dice.split('d'))
+            num_dice, num_faces = map(int, dice.split('d'))
         except Exception:
             await self.bot.say('Format is XdY!')
             return
