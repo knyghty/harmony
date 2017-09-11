@@ -9,7 +9,7 @@ class Admin:
 
     @commands.command(pass_context=True)
     async def set_avatar(self, ctx, url: str):
-        print(self.bot.application_info())
+        print(list(self.bot.application_info()))
         if ctx.message.author == self.bot.application_info().owner:
             r = requests.get(url, stream=True)
             image = b''.join(chunk for chunk in r.iter_content(chunk_size=128))
