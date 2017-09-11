@@ -8,12 +8,12 @@ class Admin:
         self.bot = bot
 
     @commands.command(pass_context=True)
+    # FIXME: Do something less bad.
+    @commands.has_role('bot')
     async def set_avatar(self, ctx, url: str):
-        await print(list(self.bot.application_info()))
-        if ctx.message.author == await self.bot.application_info().owner:
-            r = requests.get(url, stream=True)
-            image = b''.join(chunk for chunk in r.iter_content(chunk_size=128))
-            await self.bot.edit_profile(avatar=image)
+        r = requests.get(url, stream=True)
+        image = b''.join(chunk for chunk in r.iter_content(chunk_size=128))
+        await self.bot.edit_profile(avatar=image)
 
 
 def setup(bot):
