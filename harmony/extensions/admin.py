@@ -7,10 +7,9 @@ class Admin:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True)
     # FIXME: Do something less bad.
     @commands.has_role('bot')
-    async def set_avatar(self, ctx, url: str):
+    async def set_avatar(self, url: str):
         r = requests.get(url, stream=True)
         image = b''.join(chunk for chunk in r.iter_content(chunk_size=128))
         await self.bot.edit_profile(avatar=image)
