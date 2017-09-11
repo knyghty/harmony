@@ -9,6 +9,7 @@ class Admin:
 
     # FIXME: Do something less bad.
     @commands.has_role('bot')
+    @commands.command()
     async def set_avatar(self, url: str):
         r = requests.get(url, stream=True)
         image = b''.join(chunk for chunk in r.iter_content(chunk_size=128))
