@@ -20,7 +20,7 @@ class RNG:
             await self.bot.say('Format is XdY!')
             return
 
-        if num_dice not in  range(1, 21) or num_faces not in range(2, 121):
+        if num_dice not in range(1, 21) or num_faces not in range(2, 121):
             await self.bot.say('Between 1 and 20 dice of between 2 and 120 faces.')
             return
 

@@ -1,12 +1,22 @@
 import pkgutil
 
+import sqlalchemy as sa
 from discord.ext import commands
+from sqlalchemy.orm import sessionmaker
 
 import extensions
 from conf import settings
+from db.base import Base
 
 
-bot = commands.Bot(command_prefix='!', description='Just a utility bot')
+class Bot(commands.Bot):
+    def __init__(self, *args, **kwargs):
+        self.engine = sa.create_engine(settings.DATABASE_URL)
+        self.Session = sessionmaker(bind=self.engine)
+        super().__init__(*args, **kwargs)
+
+
+bot = Bot(command_prefix='!', description='Just a utility bot')
 
 
 @bot.event
@@ -25,4 +35,5 @@ if __name__ == '__main__':
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
 
+    Base.metadata.create_all(bot.engine)
     bot.run(settings.BOT_TOKEN)

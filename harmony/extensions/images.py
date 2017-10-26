@@ -29,6 +29,5 @@ class Image:
         await self.bot.upload(matches[0])
 
 
-
 def setup(bot):
     bot.add_cog(Image(bot))
