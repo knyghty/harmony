@@ -1,6 +1,7 @@
 import datetime
 
 import discord
+import pendulum
 import sqlalchemy as sa
 from discord.ext import commands
 
@@ -28,10 +29,10 @@ class LastSpoke:
             await self.bot.say('Nothing found.')
             return
 
-        await self.bot.say('<@{}> said "{}" at {}'.format(
+        await self.bot.say('<@{}> said "{}" {}'.format(
             utterance.user_id,
             utterance.utterance,
-            utterance.uttered_time,
+            pendulum.instance(utterance.uttered_time).diff_for_humans(),
         ))
 
     async def update(self, message):
