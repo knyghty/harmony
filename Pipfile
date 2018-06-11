@@ -12,6 +12,7 @@ pendulum = "*"
 
 [dev-packages]
 "flake8" = "*"
+isort = "*"
 
 [requires]
 python_version = "3.6"
