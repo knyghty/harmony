@@ -14,6 +14,15 @@ class RNG:
         Keyword arguments:
         dice -- number of dice (X) and faces (Y) in the format XdY
         """
+        d6 = {
+            1: '⚀',
+            2: '⚁',
+            3: '⚂',
+            4: '⚃',
+            5: '⚄',
+            6: '⚅',
+        }
+
         try:
             num_dice, num_faces = map(int, dice.split('d'))
         except Exception:
@@ -25,7 +34,8 @@ class RNG:
             return
 
         rolls = [random.randint(1, num_faces) for _ in range(num_dice)]
-        await self.bot.say(', '.join(map(str, rolls)) + ' (total {})'.format(sum(rolls)))
+        output = f'{(" ".join(d6[roll] for roll in rolls))}' if num_faces == 6 else ', '.join(map(str, rolls))
+        await self.bot.say(f'{output} (total {sum(rolls)})')
 
     @commands.command()
     async def choose(self, *choices: str):
