@@ -8,7 +8,6 @@ name = "pypi"
 requests = "*"
 sqlalchemy = "*"
 "psycopg2" = "*"
-pendulum = "*"
 
 [dev-packages]
 "flake8" = "*"

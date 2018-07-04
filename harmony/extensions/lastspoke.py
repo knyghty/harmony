@@ -3,7 +3,6 @@ import datetime
 import discord
 from discord.ext import commands
 
-import pendulum
 import sqlalchemy as sa
 
 from db.base import Base
@@ -29,12 +28,9 @@ class LastSpoke:
         except IndexError:
             await self.bot.say('Nothing found.')
             return
-
-        await self.bot.say('<@{}> said "{}" {}'.format(
-            utterance.user_id,
-            utterance.utterance,
-            pendulum.instance(utterance.uttered_time).diff_for_humans(),
-        ))
+        embed = discord.Embed(description=utterance.utterance, timestamp=utterance.uttered_time)
+        embed.set_author(utterance.user_id)
+        await self.bot.say(embed=embed)
 
     async def update(self, message):
         session = self.bot.Session()
