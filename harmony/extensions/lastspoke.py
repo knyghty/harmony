@@ -29,7 +29,7 @@ class LastSpoke:
             await self.bot.say('Nothing found.')
             return
         embed = discord.Embed(description=utterance.utterance, timestamp=utterance.uttered_time)
-        embed.set_author(name=f'@<{utterance.user_id}>', icon_url=user.server.get_member(utterance.user_id).avatar_url)
+        embed.set_author(name=f'<@{utterance.user_id}>', icon_url=user.server.get_member(utterance.user_id).avatar_url)
         await self.bot.say(embed=embed)
 
     async def update(self, message):
