@@ -28,8 +28,9 @@ class LastSpoke:
         except IndexError:
             await self.bot.say('Nothing found.')
             return
-        embed = discord.Embed(description=utterance.utterance, timestamp=utterance.uttered_time)
-        embed.set_author(name=f'<@{utterance.user_id}>', icon_url=user.server.get_member(utterance.user_id).avatar_url)
+        member = user.server.get_member(utterance.user_id)
+        embed = discord.Embed(description=utterance.utterance, timestamp=utterance.uttered_time, color=member.color)
+        embed.set_author(name=member.display_name, icon_url=member.avatar_url)
         await self.bot.say(embed=embed)
 
     async def update(self, message):
